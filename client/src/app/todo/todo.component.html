@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      ToDo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">ToDo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card *ngFor="let t of (todoSer.todos$ | async)">
+    
+    <ion-card-content>
+      <ion-card-subtitle>
+        {{ t.title }}
+      </ion-card-subtitle>
+
+      <div class="ion-text-right">
+        <ion-button (click)="onEdit(t)" color="primary">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+  
+        <ion-button (click)="onDelete(t.id)" color="danger">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="onCreate()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+<ion-loading [isOpen]="loadingSer.isLoading$ | async" spinner="circles"></ion-loading>
